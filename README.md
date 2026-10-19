@@ -1,2 +1,2 @@
-# terra-wk-2
+# Terra Week 2
 A Terminal Based Monster Fighter.
