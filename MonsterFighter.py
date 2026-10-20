@@ -24,7 +24,7 @@ while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
     print(f"Monster HP:{m_hp}")
     print(f"Player HP:{p_hp}")
-    while turn == 0:       
+    while turn == 0:
             pmv = input(f"What is your {trn_num} attack?  ").lower()
             if pmv in attacks:
                 pmv_i = attacks.index(pmv)
