@@ -3,7 +3,7 @@ import random
 line = "=" * 30
 p_hp = 20
 m_hp = 20
-attacks = ["BONK", "SWIPE"]
+attacks = ["bonk", "swipe"]
 dmg = [3, 5]
 def dead(a):
     if a <= 0:
