@@ -41,10 +41,11 @@ while m_hp > 0 or p_hp > 0:
                 else:
                     print("What was that?")
             elif ag == 1:
-                pmv = input(f"\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[KWhat is your {trn_num} attack?  ").upper()
+                pmv = input(f"\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[FWhat is your {trn_num} attack?  ").upper()
                 if pmv in attacks:
                     pmv_i = attacks.index(pmv)
                     turn = 1
+                    ag = 0
                 else:
                     print("What was that?")
     m_hp = m_hp - dmg[pmv_i]
