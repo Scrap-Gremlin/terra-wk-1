@@ -3,7 +3,7 @@ import random, sys, time
 line = "=" * 30
 p_hp = 20
 m_hp = 20
-attacks = ["bonk", "swipe"]
+attacks = ["BONK", "SWIPE"]
 dmg = [3, 5]
 health_l = ["          ", "=         ", "==        ", "===       ", "====      ", "=====     ", "======    ", "=======   ", "========  ", "========= ", "=========="]
 def dead(a):
@@ -33,10 +33,8 @@ print("Bonk.....3dmg\nSwipe....5dmg")
 print(line)
 while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
-    print(f"Monster HP:{m_health}")
-    print(f"Player HP: {p_health}")
     while turn == 0:
-            pmv = input(f"What is your {trn_num} attack?  ").lower()
+            pmv = input(f"What is your {trn_num} attack?  ").upper()
             if pmv in attacks:
                 pmv_i = attacks.index(pmv)
                 turn = 1
