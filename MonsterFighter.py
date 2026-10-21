@@ -1,10 +1,11 @@
-import random
+import random, sys, time
 #start text
 line = "=" * 30
 p_hp = 20
 m_hp = 20
 attacks = ["bonk", "swipe"]
 dmg = [3, 5]
+health_l = ["          ", "=         ", "==        ", "===       ", "====      ", "=====     ", "======    ", "=======   ", "========  ", "========= ", "=========="]
 def dead(a):
     if a <= 0:
         return True
@@ -12,18 +13,20 @@ def dead(a):
         return False
 turn = 0
 trn = 0
+m_health = health_l[m_hp / 2]
+p_health = health_l[p_hp/ 2]
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
 print("Welcome to Monster Fighter!")
-print(f"Monster HP:{m_hp}")
-print(f"Player HP:{p_hp}")
+print(f"Monster HP:{m_health}")
+print(f"Player HP:{p_health}")
 print(line)
 print("Attacks:")
 print("Bonk.....3dmg\nSwipe....5dmg")
 print(line)
 while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
-    print(f"Monster HP:{m_hp}")
-    print(f"Player HP:{p_hp}")
+    print(f"Monster HP:{m_health}")
+    print(f"Player HP:{p_health}")
     while turn == 0:
             pmv = input(f"What is your {trn_num} attack?  ").lower()
             if pmv in attacks:
@@ -32,16 +35,18 @@ while m_hp > 0 or p_hp > 0:
             else:
                 print("What was that?")
     m_hp = m_hp - dmg[pmv_i]
+    health = health_l[20 - m_hp] 
     print(line)
-    print(f"Monster HP:{m_hp}")
-    print(f"Player HP:{p_hp}")
+    print(f"Monster HP:{m_health}")
+    print(f"Player HP:{p_health}")
     print(line)
     mmv = random.randint(0, 1)
     print(f"Monster used {attacks[mmv]}")
     p_hp = p_hp - dmg[mmv]
+    p_health = health_l[20 - p_hp]
     print(line)
-    print(f"Monster HP:{m_hp}")
-    print(f"Player HP:{p_hp}")
+    print(f"Monster HP:{m_health}")
+    print(f"Player HP:{p_health}")
     if dead(m_hp) == False and dead(p_hp) == True:
         print("GAME OVER")
         again = input("Play again? (y/n) ").lower()
