@@ -95,7 +95,7 @@ while m_hp > 0 or p_hp > 0:
             m_hp = 20
             ag = 1
     elif dead(m_hp) == True and dead(p_hp) == True:
-        print(f"A life for a life a guess.\n{line}\nGAME OVER")
+        print(f"A life for a life I guess.\n{line}\nGAME OVER")
         again = input("Play again? (y/n) ").lower()
         if "n" in again:
             print("Farewell")
