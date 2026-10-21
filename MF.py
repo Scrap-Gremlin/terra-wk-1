@@ -25,8 +25,6 @@ else:
 p_health = health_l[p_health]
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
 print("Welcome to Monster Fighter!")
-print(f"Monster HP:{m_health}")
-print(f"Player  HP:{p_health}")
 print(line)
 print("Attacks:")
 print("Bonk.....3dmg\nSwipe....5dmg")
@@ -47,12 +45,10 @@ while m_hp > 0 or p_hp > 0:
         m_health = m_hp / 2
     m_health = health_l[m_health]
     print(line)
-    print(f"Monster HP:{m_health}")
-    print(f"Player  HP:{p_health}")
-    print(line)
-    mmv = random.randint(0, 1)
-    print(f"Monster used {attacks[mmv]}")
-    p_hp = p_hp - dmg[mmv]
+    print(f" Player used:{pmv}")
+    mmv_i = random.randint(0, 1)
+    print(f"Monster used:{attacks[mmv_i]}")
+    p_hp = p_hp - dmg[mmv_i]
     if isinstance((p_hp / 2), float):
         p_health = round((p_hp / 2))
     else:
@@ -60,7 +56,8 @@ while m_hp > 0 or p_hp > 0:
     p_health = health_l[p_health]
     print(line)
     print(f"Monster HP:{m_health}")
-    print(f"Player  HP:{p_health}")
+    print(f" Player HP:{p_health}")
+    print(line)
     if dead(m_hp) == False and dead(p_hp) == True:
         print("GAME OVER")
         again = input("Play again? (y/n) ").lower()
