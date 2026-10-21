@@ -5,7 +5,7 @@ p_hp = 20
 m_hp = 20
 attacks = ["BONK", "SWIPE"]
 dmg = [3, 5]
-health_l = ["          ", "=         ", "==        ", "===       ", "====      ", "=====     ", "======    ", "=======   ", "========  ", "========= ", "=========="]
+health_l = ["                       ", "=                      ", "==                     ", "===                    ", "====                   ", "=====                  ", "======                 ", "=======                ", "========               ", "=========              ", "==========             "]
 def dead(a):
     if a <= 0:
         return True
@@ -13,6 +13,7 @@ def dead(a):
         return False
 turn = 0
 trn = 0
+ag = 0
 if isinstance((m_hp / 2), float):
     m_health = round((m_hp / 2))
 else:
@@ -24,7 +25,7 @@ else:
     p_health = p_hp / 2
 p_health = health_l[p_health]
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
-print("Welcome to Monster Fighter!")
+print("\033[F\033[F\033[FWelcome to Monster Fighter!                                                  ")
 print(line)
 print("Attacks:")
 print("Bonk.....3dmg\nSwipe....5dmg")
@@ -32,29 +33,39 @@ print(line)
 while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
     while turn == 0:
-            pmv = input(f"What is your {trn_num} attack?  ").upper()
-            if pmv in attacks:
-                pmv_i = attacks.index(pmv)
-                turn = 1
-            else:
-                print("What was that?")
+            if ag == 0:
+                pmv = input(f"What is your {trn_num} attack?  ").upper()
+                if pmv in attacks:
+                    pmv_i = attacks.index(pmv)
+                    turn = 1
+                else:
+                    print("What was that?")
+            elif ag == 1:
+                pmv = input(f"\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[KWhat is your {trn_num} attack?  ").upper()
+                if pmv in attacks:
+                    pmv_i = attacks.index(pmv)
+                    turn = 1
+                else:
+                    print("What was that?")
     m_hp = m_hp - dmg[pmv_i]
     if isinstance((m_hp / 2), float):
         m_health = round((m_hp / 2))
     else:
         m_health = m_hp / 2
     m_health = health_l[m_health]
-    print(line)
-    print(f" Player used:{pmv}")
+    if trn == 0:
+        print(f"\033[FPlayer used: {pmv}                ")
+    elif trn > 0:
+        print(f"\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[KPlayer used: {pmv}                ")
     mmv_i = random.randint(0, 1)
-    print(f"Monster used:{attacks[mmv_i]}")
+    print(f"Monster used: {attacks[mmv_i]}                ")
+    print(line)
     p_hp = p_hp - dmg[mmv_i]
     if isinstance((p_hp / 2), float):
         p_health = round((p_hp / 2))
     else:
         p_health = p_hp / 2
     p_health = health_l[p_health]
-    print(line)
     print(f"Monster HP:{m_health}")
     print(f" Player HP:{p_health}")
     print(line)
@@ -65,11 +76,11 @@ while m_hp > 0 or p_hp > 0:
             print("Farewell")
             break
         else:
-            print(line)
             turn = 0
             trn = 0
             p_hp = 20
             m_hp = 20
+            ag = 1
     elif dead(m_hp) == True and dead(p_hp) == False:
         print("YOU WON!")
         again = input("Play again? (y/n) ").lower()
@@ -77,11 +88,11 @@ while m_hp > 0 or p_hp > 0:
             print("Farewell")
             break
         else:
-            print(line)
             turn = 0
             trn = 0
             p_hp = 20
             m_hp = 20
+            ag = 1
     elif dead(m_hp) == True and dead(p_hp) == True:
         print(f"A life for a life a guess.\n{line}\nGAME OVER")
         again = input("Play again? (y/n) ").lower()
@@ -89,13 +100,12 @@ while m_hp > 0 or p_hp > 0:
             print("Farewell")
             break
         else:
-            print(line)
             turn = 0
             trn = 0
             p_hp = 20
             m_hp = 20
+            ag = 1
 
-    else:
-        print(line)
+    else:   
         turn = 0
         trn = trn + 1

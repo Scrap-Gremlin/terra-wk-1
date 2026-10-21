@@ -9,3 +9,4 @@ time.sleep(1)
 print("\033[F\033[F\033[FThis is the second line.")
 print("This is the second line")
 print("This is the second line")
+```
