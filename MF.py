@@ -13,12 +13,20 @@ def dead(a):
         return False
 turn = 0
 trn = 0
-m_health = health_l[m_hp / 2]
-p_health = health_l[p_hp/ 2]
+if isinstance((m_hp / 2), float):
+    m_health = round((m_hp / 2))
+else:
+    m_health = m_hp / 2
+m_health = health_l[m_health]
+if isinstance((p_hp / 2), float):
+    p_health = round((p_hp / 2))
+else:
+    p_health = p_hp / 2
+p_health = health_l[p_health]
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
 print("Welcome to Monster Fighter!")
 print(f"Monster HP:{m_health}")
-print(f"Player HP:{p_health}")
+print(f"Player HP: {p_health}")
 print(line)
 print("Attacks:")
 print("Bonk.....3dmg\nSwipe....5dmg")
@@ -26,7 +34,7 @@ print(line)
 while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
     print(f"Monster HP:{m_health}")
-    print(f"Player HP:{p_health}")
+    print(f"Player HP: {p_health}")
     while turn == 0:
             pmv = input(f"What is your {trn_num} attack?  ").lower()
             if pmv in attacks:
@@ -35,18 +43,26 @@ while m_hp > 0 or p_hp > 0:
             else:
                 print("What was that?")
     m_hp = m_hp - dmg[pmv_i]
-    health = health_l[20 - m_hp] 
+    if isinstance((m_hp / 2), float):
+        m_health = round((m_hp / 2))
+    else:
+        m_health = m_hp / 2
+    m_health = health_l[m_health]
     print(line)
     print(f"Monster HP:{m_health}")
-    print(f"Player HP:{p_health}")
+    print(f"Player HP: {p_health}")
     print(line)
     mmv = random.randint(0, 1)
     print(f"Monster used {attacks[mmv]}")
     p_hp = p_hp - dmg[mmv]
-    p_health = health_l[20 - p_hp]
+    if isinstance((p_hp / 2), float):
+        p_health = round((p_hp / 2))
+    else:
+        p_health = p_hp / 2
+    p_health = health_l[p_health]
     print(line)
     print(f"Monster HP:{m_health}")
-    print(f"Player HP:{p_health}")
+    print(f"Player HP: {p_health}")
     if dead(m_hp) == False and dead(p_hp) == True:
         print("GAME OVER")
         again = input("Play again? (y/n) ").lower()
