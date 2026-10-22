@@ -67,6 +67,7 @@ while m_hp > 0 or p_hp > 0:
         print("GAME OVER")
         again = input("Play again? (y/n) ").lower()
         if "n" in again:
+            print(line)
             print("Farewell")
             break
         else:
@@ -79,6 +80,7 @@ while m_hp > 0 or p_hp > 0:
         print("YOU WON!")
         again = input("Play again? (y/n) ").lower()
         if "n" in again:
+            print(line)
             print("Farewell")
             break
         else:
@@ -91,6 +93,7 @@ while m_hp > 0 or p_hp > 0:
         print(f"A life for a life I guess.\n{line}\nGAME OVER")
         again = input("Play again? (y/n) ").lower()
         if "n" in again:
+            print(line)
             print("Farewell")
             break
         else:
