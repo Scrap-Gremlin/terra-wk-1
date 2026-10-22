@@ -1,11 +1,16 @@
 import random, sys, time
 #start text
 line = "=" * 30
-p_hp = 20
-m_hp = 20
+p_hp = 10
+m_hp = 10
 attacks = ["BONK", "SWIPE"]
-dmg = [3, 5]
-health_l = ["                       ", "=                      ", "==                     ", "===                    ", "====                   ", "=====                  ", "======                 ", "=======                ", "========               ", "=========              ", "==========             "]
+def is_positive(int):
+    if int <= 0:
+        return 0
+    elif int > 0:
+        return int 
+dmg = [2, 3]
+health_l = ["|          |", "|=         |", "|==        |", "|===       |", "|====      |", "|=====     |", "|======    |", "|=======   |", "|========  |", "|========= |", "|==========|"]
 def dead(a):
     if a <= 0:
         return True
@@ -14,21 +19,15 @@ def dead(a):
 turn = 0
 trn = 0
 ag = 0
-if isinstance((m_hp / 2), float):
-    m_health = round((m_hp / 2))
-else:
-    m_health = m_hp / 2
+m_health = is_positive(m_hp)
 m_health = health_l[m_health]
-if isinstance((p_hp / 2), float):
-    p_health = round((p_hp / 2))
-else:
-    p_health = p_hp / 2
+p_health = is_positive(p_hp)
 p_health = health_l[p_health]
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
-print("\033[F\033[F\033[FWelcome to Monster Fighter!                                                  ")
+print("\033[F\033[F\033[F\033[KWelcome to Monster Fighter!")
 print(line)
 print("Attacks:")
-print("Bonk.....3dmg\nSwipe....5dmg")
+print("Bonk.....2dmg\nSwipe....3dmg")
 print(line)
 while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
@@ -41,7 +40,7 @@ while m_hp > 0 or p_hp > 0:
                 else:
                     print("What was that?")
             elif ag == 1:
-                pmv = input(f"\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[FWhat is your {trn_num} attack?  ").upper()
+                pmv = input(f"\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[K\033[F\033[KWhat is your {trn_num} attack?  ").upper()
                 if pmv in attacks:
                     pmv_i = attacks.index(pmv)
                     turn = 1
@@ -49,10 +48,7 @@ while m_hp > 0 or p_hp > 0:
                 else:
                     print("What was that?")
     m_hp = m_hp - dmg[pmv_i]
-    if isinstance((m_hp / 2), float):
-        m_health = round((m_hp / 2))
-    else:
-        m_health = m_hp / 2
+    m_health = is_positive(m_hp)
     m_health = health_l[m_health]
     if trn == 0:
         print(f"\033[FPlayer used: {pmv}                ")
@@ -62,10 +58,7 @@ while m_hp > 0 or p_hp > 0:
     print(f"Monster used: {attacks[mmv_i]}                ")
     print(line)
     p_hp = p_hp - dmg[mmv_i]
-    if isinstance((p_hp / 2), float):
-        p_health = round((p_hp / 2))
-    else:
-        p_health = p_hp / 2
+    p_health = is_positive(p_hp)
     p_health = health_l[p_health]
     print(f"Monster HP:{m_health}")
     print(f" Player HP:{p_health}")
@@ -79,8 +72,8 @@ while m_hp > 0 or p_hp > 0:
         else:
             turn = 0
             trn = 0
-            p_hp = 20
-            m_hp = 20
+            p_hp = 10
+            m_hp = 10
             ag = 1
     elif dead(m_hp) == True and dead(p_hp) == False:
         print("YOU WON!")
@@ -91,8 +84,8 @@ while m_hp > 0 or p_hp > 0:
         else:
             turn = 0
             trn = 0
-            p_hp = 20
-            m_hp = 20
+            p_hp = 10
+            m_hp = 10
             ag = 1
     elif dead(m_hp) == True and dead(p_hp) == True:
         print(f"A life for a life I guess.\n{line}\nGAME OVER")
@@ -103,8 +96,8 @@ while m_hp > 0 or p_hp > 0:
         else:
             turn = 0
             trn = 0
-            p_hp = 20
-            m_hp = 20
+            p_hp = 10
+            m_hp = 10
             ag = 1
 
     else:   
