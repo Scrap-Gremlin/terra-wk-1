@@ -10,19 +10,18 @@ def is_positive(int):
     elif int > 0:
         return int 
 dmg = [2, 3]
-health_l = ["|          |", "|=         |", "|==        |", "|===       |", "|====      |", "|=====     |", "|======    |", "|=======   |", "|========  |", "|========= |", "|==========|"]
+m_health = "=========="
+p_health = "=========="
 def dead(a):
     if a <= 0:
         return True
     else:
         return False
+def damager(a,b):
+    return a[:-b]
 turn = 0
 trn = 0
 ag = 0
-m_health = is_positive(m_hp)
-m_health = health_l[m_health]
-p_health = is_positive(p_hp)
-p_health = health_l[p_health]
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
 print("\033[F\033[F\033[F\033[KWelcome to Monster Fighter!")
 print(line)
@@ -47,9 +46,10 @@ while m_hp > 0 or p_hp > 0:
                     ag = 0
                 else:
                     print("What was that?")
-    m_hp = m_hp - dmg[pmv_i]
-    m_health = is_positive(m_hp)
-    m_health = health_l[m_health]
+    if m_hp > 0:
+        m_health = damager(m_health,dmg[pmv_i])
+    else:
+        m_health = ""
     if trn == 0:
         print(f"\033[FPlayer used: {pmv}                ")
     elif trn > 0:
@@ -58,10 +58,12 @@ while m_hp > 0 or p_hp > 0:
     print(f"Monster used: {attacks[mmv_i]}                ")
     print(line)
     p_hp = p_hp - dmg[mmv_i]
-    p_health = is_positive(p_hp)
-    p_health = health_l[p_health]
-    print(f"Monster HP:{m_health}")
-    print(f" Player HP:{p_health}")
+    if p_hp > 0:
+        p_health = damager(p_health,dmg[mmv_i])
+    else:
+        p_health = ""
+    print(f"Monster HP:|{m_health}|")
+    print(f" Player HP:|{p_health}|")
     print(line)
     if dead(m_hp) == False and dead(p_hp) == True:
         print("GAME OVER")
