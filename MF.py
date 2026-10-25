@@ -31,7 +31,10 @@ ag = 0
 skip = 0
 mskip = 0
 wait = 0
-trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
+limit_swipe = 0
+mlimit_swipe = 0
+wt2 = 0
+trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth"]
 print(f"{"\033[F\033[K" * 20}Welcome to Monster Fighter!")
 print(line)
 print(f"Attacks:{" " * 40}")
@@ -45,21 +48,47 @@ while m_hp > 0 or p_hp > 0:
                 if ag == 0:
                     pmv = input(f"What is your {trn_num} attack?  ").upper()
                     if pmv in attacks:
-                        pmv_i = attacks.index(pmv)
-                        turn = 1
-                        ag = 0
+                        if pmv == "SWIPE":
+                            if limit_swipe > 3:
+                                print("You can't use that anymore.")
+                                wt = 1
+                                ag = 0
+                            else:
+                                pmv_i = 1
+                                turn = 1
+                                ag = 0
+                        else:
+                            pmv_i = attacks.index(pmv)
+                            turn = 1
+                            ag = 0
                     else:
                         print("What was that?")
-                        wt = 1
+                        if wt == 0:
+                            wt = 1
+                        elif wt == 1:
+                            wt = 2
                 elif ag == 1:
                     pmv = input(f"{"\033[F\033[K" * 8}What is your {trn_num} attack?  ").upper()
                     if pmv in attacks:
-                        pmv_i = attacks.index(pmv)
-                        turn = 1
-                        ag = 0
+                            if pmv == "SWIPE":
+                                if limit_swipe > 3:
+                                    print("You can't use that anymore.")
+                                    wt = 1
+                                    ag = 0
+                                else:
+                                    pmv_i = 1
+                                    turn = 1
+                                    ag = 0
+                            else:
+                                pmv_i = attacks.index(pmv)
+                                turn = 1
+                                ag = 0
                     else:
                         print("What was that?")
-                        wt = 1
+                        if wt == 0:
+                            wt = 1
+                        elif wt == 1:
+                            wt = 2
             elif skip == 1:
                 print("(turn skipped)")
                 turn = 1
@@ -75,23 +104,35 @@ while m_hp > 0 or p_hp > 0:
     if trn == 0:
         if wt == 0:
             print(f"\033[FPlayer used: {pmv}{spc}")
-        else:
+        elif wt == 1:
             print(f"{"\033[F\033[K" * 3}Player used: {pmv}{spc}")
+        elif wt == 2:
+            print(f"{"\033[F\033[K" * 5}Player used: {pmv}{spc}")
     elif trn > 0:
         if wt == 0:
             print(f"{"\033[F\033[K" * 7}Player used: {pmv}{spc}")
-        else:
+        elif wt == 1:
             print(f"{"\033[F\033[K" * 9}Player used: {pmv}{spc}")
+        elif wt == 2:
+            print(f"{"\033[F\033[K" * 11}Player used: {pmv}{spc}")
     if pmv_i == 2:
         skip = 1
         wait = 1
     else:
-        skip =  0
+        skip = 0
+    if pmv_i == 1:
+        limit_swipe = limit_swipe + 1
     if mskip == 0:
         mmv_i = random.randint(0, 2)
     elif mskip == 1:
         mmv_i = 3
-    print(f"Monster used: {attacks[mmv_i]}")
+    if mmv_i == 1:
+        mlimit_swipe = limit_swipe + 1
+    if mlimit_swipe <= 3:
+        print(f"Monster used: {attacks[mmv_i]}")
+    elif mlimit_swipe > 3:
+        mmv_i = random.randint(0, 1)
+        print(f"Monster used: {attacks[mmv_i]}")
     print(line)
     p_hp = p_hp - dmg[mmv_i]
     if p_hp > 0:
@@ -125,6 +166,7 @@ while m_hp > 0 or p_hp > 0:
             p_health = "===================="
             p_spc = ""
             m_spc = ""
+            limit_swipe = 0
     elif dead(m_hp) == True and dead(p_hp) == False:
         print("YOU WON!")
         again = input("Play again? (y/n) ").lower()
@@ -143,6 +185,8 @@ while m_hp > 0 or p_hp > 0:
             p_health = "===================="
             p_spc = ""
             m_spc = ""
+            limit_swipe = 0
+
     elif dead(m_hp) == True and dead(p_hp) == True:
         print(f"A life for a life I guess.\n{line}\nGAME OVER")
         again = input("Play again? (y/n) ").lower()
@@ -161,6 +205,7 @@ while m_hp > 0 or p_hp > 0:
             p_health = "=========="
             p_spc = ""
             m_spc = ""
+            limit_swipe = 0
 
     else:   
         turn = 0
