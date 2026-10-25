@@ -1,8 +1,1 @@
-import sys, time
-
-health = "=========="
-for x in range(11):
-    sys.stdout.write(f"\r\033[K{health}")
-    sys.stdout.flush()
-    health = health[:-2]
-    time.sleep(.5)
+new = turn = 0, trn = 0, p_hp = 10, m_hp = 10, ag = 1, m_health = "==========", p_health = "==========", p_spc = "", m_spc = ""
