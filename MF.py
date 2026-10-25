@@ -1,18 +1,18 @@
 import random, sys, time
 #start text
-line = "=" * 30
-spc = " " * 30
-p_hp = 10
-m_hp = 10
-attacks = ["BONK", "SWIPE"]
+line = "=" * 40
+spc = " " * 40
+p_hp = 20
+m_hp = 20
+attacks = ["BONK", "SWIPE", "BOOM"]
 def is_positive(int):
     if int <= 0:
         return 0
     elif int > 0:
         return int 
-dmg = [2, 3]
-m_health = "=========="
-p_health = "=========="
+dmg = [2, 3, 5]
+m_health = "===================="
+p_health = "===================="
 p_spc = ""
 m_spc = ""
 def dead(a):
@@ -29,7 +29,7 @@ trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh
 print(f"{"\033[F\033[K" * 20}Welcome to Monster Fighter!")
 print(line)
 print(f"Attacks:{" " * 40}")
-print("Bonk.....2dmg\nSwipe....3dmg")
+print("Bonk.....2dmg\nSwipe....3dmg\nBoom.....5dmg")
 print(line)
 while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
@@ -44,7 +44,7 @@ while m_hp > 0 or p_hp > 0:
                     print("What was that?")
                     wt = 1
             elif ag == 1:
-                pmv = input(f"{"\033[F\033[K" * 10}What is your {trn_num} attack?  ").upper()
+                pmv = input(f"{"\033[F\033[K" * 8}What is your {trn_num} attack?  ").upper()
                 if pmv in attacks:
                     pmv_i = attacks.index(pmv)
                     turn = 1
@@ -68,7 +68,7 @@ while m_hp > 0 or p_hp > 0:
             print(f"{"\033[F\033[K" * 7}Player used: {pmv}{spc}")
         else:
             print(f"{"\033[F\033[K" * 9}Player used: {pmv}{spc}")
-    mmv_i = random.randint(0, 1)
+    mmv_i = random.randint(0, 2)
     print(f"Monster used: {attacks[mmv_i]}")
     print(line)
     p_hp = p_hp - dmg[mmv_i]
@@ -76,8 +76,8 @@ while m_hp > 0 or p_hp > 0:
         p_health = damager(p_health,dmg[mmv_i])
     else:
         p_health = ""
-    p_spc = (p_spc + (" " * (dmg[mmv_i])))[:10]
-    m_spc = (m_spc + (" " * (dmg[pmv_i])))[:10]
+    p_spc = (p_spc + (" " * (dmg[mmv_i])))[:20]
+    m_spc = (m_spc + (" " * (dmg[pmv_i])))[:20]
     print(f"Monster HP:|{m_health}{m_spc}|")
     print(f" Player HP:|{p_health}{p_spc}|")
     print(line)
@@ -92,11 +92,11 @@ while m_hp > 0 or p_hp > 0:
         else:
             turn = 0
             trn = 0
-            p_hp = 10
-            m_hp = 10
+            p_hp = 20
+            m_hp = 20
             ag = 1
-            m_health = "=========="
-            p_health = "=========="
+            m_health = "===================="
+            p_health = "===================="
             p_spc = ""
             m_spc = ""
     elif dead(m_hp) == True and dead(p_hp) == False:
@@ -110,11 +110,11 @@ while m_hp > 0 or p_hp > 0:
         else:
             turn = 0
             trn = 0
-            p_hp = 10
-            m_hp = 10
+            p_hp = 20
+            m_hp = 20
             ag = 1
-            m_health = "=========="
-            p_health = "=========="
+            m_health = "===================="
+            p_health = "===================="
             p_spc = ""
             m_spc = ""
     elif dead(m_hp) == True and dead(p_hp) == True:
