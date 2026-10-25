@@ -33,7 +33,6 @@ mskip = 0
 wait = 0
 limit_swipe = 0
 mlimit_swipe = 0
-wt2 = 0
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth"]
 print(f"{"\033[F\033[K" * 20}Welcome to Monster Fighter!")
 print(line)
@@ -186,6 +185,8 @@ while m_hp > 0 or p_hp > 0:
             p_spc = ""
             m_spc = ""
             limit_swipe = 0
+            skip = 0
+            mskip = 0
 
     elif dead(m_hp) == True and dead(p_hp) == True:
         print(f"A life for a life I guess.\n{line}\nGAME OVER")
@@ -206,6 +207,9 @@ while m_hp > 0 or p_hp > 0:
             p_spc = ""
             m_spc = ""
             limit_swipe = 0
+            mlimit_swipe = 0
+            wt = 0
+            wait = 0
 
     else:   
         turn = 0
