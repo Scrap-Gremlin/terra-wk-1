@@ -4,13 +4,13 @@ line = "=" * 40
 spc = " " * 40
 p_hp = 20
 m_hp = 20
-attacks = ["BONK", "SWIPE", "BOOM"]
+attacks = ["BONK", "SWIPE", "BOOM", "(turn skipped)"]
 def is_positive(int):
     if int <= 0:
         return 0
     elif int > 0:
         return int 
-dmg = [2, 3, 5]
+dmg = [2, 3, 5, 0]
 m_health = "===================="
 p_health = "===================="
 p_spc = ""
@@ -21,10 +21,16 @@ def dead(a):
     else:
         return False
 def damager(a,b):
-    return a[:-b]
+    if b <= 0:
+        return a
+    elif b > 0:
+        return a[:-b]
 turn = 0
 trn = 0
 ag = 0
+skip = 0
+mskip = 0
+wait = 0
 trn_num_list = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh"]
 print(f"{"\033[F\033[K" * 20}Welcome to Monster Fighter!")
 print(line)
@@ -35,23 +41,31 @@ while m_hp > 0 or p_hp > 0:
     trn_num = trn_num_list[trn]
     wt = 0
     while turn == 0:
-            if ag == 0:
-                pmv = input(f"What is your {trn_num} attack?  ").upper()
-                if pmv in attacks:
-                    pmv_i = attacks.index(pmv)
-                    turn = 1
-                else:
-                    print("What was that?")
-                    wt = 1
-            elif ag == 1:
-                pmv = input(f"{"\033[F\033[K" * 8}What is your {trn_num} attack?  ").upper()
-                if pmv in attacks:
-                    pmv_i = attacks.index(pmv)
-                    turn = 1
-                    ag = 0
-                else:
-                    print("What was that?")
-                    wt = 1
+            if skip == 0:
+                if ag == 0:
+                    pmv = input(f"What is your {trn_num} attack?  ").upper()
+                    if pmv in attacks:
+                        pmv_i = attacks.index(pmv)
+                        turn = 1
+                        ag = 0
+                    else:
+                        print("What was that?")
+                        wt = 1
+                elif ag == 1:
+                    pmv = input(f"{"\033[F\033[K" * 8}What is your {trn_num} attack?  ").upper()
+                    if pmv in attacks:
+                        pmv_i = attacks.index(pmv)
+                        turn = 1
+                        ag = 0
+                    else:
+                        print("What was that?")
+                        wt = 1
+            elif skip == 1:
+                print("(turn skipped)")
+                turn = 1
+                pmv = "(turn skipped)"
+                pmv_i = 3
+                wait = 0
     if m_hp > 0:
         m_health = damager(m_health,dmg[pmv_i])
         m_hp = m_hp - dmg[pmv_i]
@@ -68,7 +82,15 @@ while m_hp > 0 or p_hp > 0:
             print(f"{"\033[F\033[K" * 7}Player used: {pmv}{spc}")
         else:
             print(f"{"\033[F\033[K" * 9}Player used: {pmv}{spc}")
-    mmv_i = random.randint(0, 2)
+    if pmv_i == 2:
+        skip = 1
+        wait = 1
+    else:
+        skip =  0
+    if mskip == 0:
+        mmv_i = random.randint(0, 2)
+    elif mskip == 1:
+        mmv_i = 3
     print(f"Monster used: {attacks[mmv_i]}")
     print(line)
     p_hp = p_hp - dmg[mmv_i]
@@ -81,6 +103,10 @@ while m_hp > 0 or p_hp > 0:
     print(f"Monster HP:|{m_health}{m_spc}|")
     print(f" Player HP:|{p_health}{p_spc}|")
     print(line)
+    if mmv_i == 2:
+        mskip = 1
+    else:
+        mskip = 0
     if dead(m_hp) == False and dead(p_hp) == True:
         print("GAME OVER")
         again = input("Play again? (y/n) ").lower()
@@ -140,3 +166,7 @@ while m_hp > 0 or p_hp > 0:
         turn = 0
         trn = trn + 1
         wt = 0
+        if wait == 1:
+            time.sleep(2)
+        else:
+            time.sleep(0)
