@@ -9,4 +9,5 @@ Bonk has no restrictions, but it is weak
 # Attacking
 The game asks for a prompt in the terminal, you have to write the move you want to use
 no spaces, any capitalization
-# HAVE FUN
+# Usage
+MF.py is the game, ignore everything else.
