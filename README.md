@@ -11,3 +11,5 @@ The game asks for a prompt in the terminal, you have to write the move you want 
 no spaces, any capitalization
 # Usage
 MF.py is the game, ignore everything else.
+Go to terminal, and type: python ./MF.py 
+this will start the code.
